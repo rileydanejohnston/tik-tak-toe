@@ -1,0 +1,4 @@
+@import url('./config/normalize.css');
+@import url('./config/global.css');
+
+@import url('./components/app/app.css');
