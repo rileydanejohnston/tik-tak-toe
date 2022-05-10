@@ -13,11 +13,37 @@ function App() {
 
   const changePlayers = () => {
     /*
-      if player 1 is currently active, set activePlayer to 2
-      if player 2 is currently active, set active player to 1
+      if p1 is active, activePlayer = p2
+      if p2 is active, activePlayer = p1
     */
     const newActivePlayer = activePlayer === 1 ? 2 : 1;
     setActivePlayer(newActivePlayer);
+  }
+  
+
+  const handleSquareClick = (clickId, selected) => {
+    // players can't choose squares that are already chosen
+    if (!selected) {
+    /*
+      find the clicked square
+      update isSelected and player properties
+    */
+      const tempBoard = board.map((square) => {
+        const { id } = square;
+        if (clickId === id) {
+          return {
+            id,
+            isSelected: true,
+            player: activePlayer,
+          };
+        }
+        return square;
+      })
+  
+      setBoard(tempBoard);
+      changePlayers();
+    }
+    
   }
 
 	return (
@@ -27,8 +53,8 @@ function App() {
 					return (
             <Square
               key={item.id}
-              activePlayer={activePlayer}
-              square={item}
+              squareInfo={item}
+              handleSquareClick={handleSquareClick}
             />
           );
 				})}

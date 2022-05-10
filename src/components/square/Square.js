@@ -1,13 +1,14 @@
 import React from 'react'
 
-export default function Square({ square }) {
+export default function Square({ squareInfo, handleSquareClick }) {
 
-  const { id, player, isSelected } = square;
+  const { id, isSelected, player } = squareInfo;
+  const squareText = player === 1 ? 'X' : 'O';
 
   return (
-    <li className='square'>
+    <li className='square' onClick={() => handleSquareClick(id, isSelected)}>
       {
-        isSelected ? player : id
+        isSelected ? squareText : id
       }
     </li>
   )
