@@ -5,37 +5,38 @@ import { boardDefault } from '../../constants/app-constants';
 function App() {
 	const [board, setBoard] = useState(boardDefault);
 	const [activePlayer, setActivePlayer] = useState(1);
-  const [turnCount, setTurnCount] = useState(0);
+	const [turnCount, setTurnCount] = useState(0);
 
 	const changePlayers = () => {
-    // if p1 is active, activePlayer = p2
-    // if p2 is active, activePlayer = p1
+		// if p1 is active, activePlayer = p2
+		// if p2 is active, activePlayer = p1
 		const newActivePlayer = activePlayer === 1 ? 2 : 1;
 		setActivePlayer(newActivePlayer);
 	};
 
-  const updateSquares = (squareId) => {
-    // find the clicked square
-    // update isSelected and player properties
-    const tempBoard = board.map(square => {
-      const { id } = square;
-      if (squareId === id) {
-        return {
-          id,
-          isSelected: true,
-          player: activePlayer,
-        };
-      }
-      return square;
-    });
-    return tempBoard;
-  }
+	const updateSquares = squareId => {
+		// find the clicked square
+		// update isSelected and player properties
+		const tempBoard = board.map(square => {
+			const { id } = square;
+			if (squareId === id) {
+				return {
+					id,
+					isSelected: true,
+					player: activePlayer,
+				};
+			}
+			return square;
+		});
+		return tempBoard;
+	};
 
 	const handleSquareClick = (clickId, selected) => {
 		// players can't choose squares that are already chosen
 		if (!selected) {
 			const tempBoard = updateSquares(clickId);
 			setBoard(tempBoard);
+      setTurnCount(turnCount + 1);
 			changePlayers();
 		}
 	};
