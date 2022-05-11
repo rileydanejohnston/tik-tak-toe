@@ -97,37 +97,28 @@ function App() {
 	useEffect(() => {
     if (turnCount < 5) return;
 
-    const diagonalResult1 = testDiagonal1();
-    const diagonalResult2 = testDiagonal2();
-    const rowResult1 = testRow1();
-    const rowResult2 = testRow2();
-    const rowResult3 = testRow3();
-    const colResult1 = testCol1();
-    const colResult2 = testCol2();
-    const colResult3 = testCol3();
-
-		if (diagonalResult1) {
+		if (testDiagonal1()) {
 			setDiagonal1(true);
 		}
-		else if (diagonalResult2) {
+		else if (testDiagonal2()) {
 			setDiagonal2(true);
 		}
-    else if (rowResult1) {
+    else if (testRow1()) {
 			setRow1(true);
 		}
-    else if (rowResult2) {
+    else if (testRow2()) {
 			setRow2(true);
 		}
-    else if (rowResult3) {
+    else if (testRow3()) {
 			setRow3(true);
 		}
-    else if (colResult1) {
+    else if (testCol1()) {
       setCol1(true);
     }
-    else if (colResult2) {
+    else if (testCol2()) {
       setCol2(true);
     }
-    else if (colResult3) {
+    else if (testCol3()) {
       setCol3(true);
     }
 
