@@ -6,6 +6,15 @@ function App() {
 	const [board, setBoard] = useState(boardDefault);
 	const [activePlayer, setActivePlayer] = useState(1);
 	const [turnCount, setTurnCount] = useState(0);
+	const [isTie, setIsTie] = useState(false);
+	const [winner, setWinner] = useState(0);
+	// describes the winning series
+	const [diagonal1, setDiagonal1] = useState(false);
+  const [diagonal2, setDiagonal2] = useState(false);
+  const [row1, setRow1] = useState(false);
+  const [row2, setRow2] = useState(false);
+  const [row3, setRow3] = useState(false);
+
 
 	const changePlayers = () => {
 		// if p1 is active, activePlayer = p2
@@ -36,10 +45,63 @@ function App() {
 		if (!selected) {
 			const tempBoard = updateSquares(clickId);
 			setBoard(tempBoard);
-      setTurnCount(turnCount + 1);
+			setTurnCount(turnCount + 1);
 			changePlayers();
 		}
 	};
+
+  // test spaces 0 - 4 - 8
+	const testDiagonal1 = () => {
+		return board[0].player === board[4].player && board[4].player === board[8].player;
+	};
+
+  // test spaces 6 - 4 - 2
+	const testDiagonal2 = () => {
+		return board[6].player === board[4].player && board[4].player === board[2].player;
+	};
+
+  // test spaces 0 - 1 - 2
+	const testRow1 = () => {
+		return board[0].player === board[1].player && board[1].player === board[2].player;
+	};
+
+  // test spaces 3 - 4 - 5
+	const testRow2 = () => {
+		return board[3].player === board[4].player && board[4].player === board[5].player;
+	};
+
+  // test spaces 6 - 7 - 8
+	const testRow3 = () => {
+		return board[6].player === board[7].player && board[7].player === board[8].player;
+	};
+
+	// check all possibilities for a winner
+	useEffect(() => {
+    if (turnCount < 5) return;
+
+    const diagonalResult1 = testDiagonal1();
+    const diagonalResult2 = testDiagonal2();
+    const rowResult1 = testRow1();
+    const rowResult2 = testRow2();
+    const rowResult3 = testRow3();
+
+		if (diagonalResult1) {
+			setDiagonal1(true);
+		}
+		else if (diagonalResult2) {
+			setDiagonal2(true);
+		}
+    else if (rowResult1) {
+			setRow1(true);
+		}
+    else if (rowResult2) {
+			setRow2(true);
+		}
+    else if (rowResult3) {
+			setRow3(true);
+		}
+    
+	}, [turnCount]);
 
 	return (
 		<div className='app'>
