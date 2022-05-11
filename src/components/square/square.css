@@ -9,6 +9,10 @@
   border: 1px solid red;
 }
 
+.square_winner {
+  background-color: aquamarine;
+}
+
 .square:hover {
   cursor: pointer;
   transform: scale(1.03);

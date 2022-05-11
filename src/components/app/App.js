@@ -58,33 +58,47 @@ function App() {
     return board[one].player === board[two].player && board[two].player === board[three].player;
   }
 
+  const setWinningSpaces = (first, second, third) => {
+    board[first].winningSpace = true;
+    board[second].winningSpace = true;
+    board[third].winningSpace = true;
+  }
+
 	// check all possibilities for a winner
 	useEffect(() => {
     if (turnCount < 5) return;
 
 		if (testSpaces(0, 4, 8)) {
 			setDiagonal1(true);
+      setWinningSpaces(0, 4, 8);
 		}
 		else if (testSpaces(2, 4, 6)) {
 			setDiagonal2(true);
+      setWinningSpaces(2, 4, 6);
 		}
     else if (testSpaces(0, 1, 2)) {
 			setRow1(true);
+      setWinningSpaces(0, 1, 2);
 		}
     else if (testSpaces(3, 4, 5)) {
 			setRow2(true);
+      setWinningSpaces(3, 4, 5);
 		}
     else if (testSpaces(6, 7, 8)) {
 			setRow3(true);
+      setWinningSpaces(6, 7, 8);
 		}
     else if (testSpaces(0, 3, 6)) {
       setCol1(true);
+      setWinningSpaces(0, 3, 6);
     }
     else if (testSpaces(1, 4, 7)) {
       setCol2(true);
+      setWinningSpaces(1, 4, 7);
     }
     else if (testSpaces(2, 5, 8)) {
       setCol3(true);
+      setWinningSpaces(2, 5, 8);
     }
 
 	}, [turnCount]);
