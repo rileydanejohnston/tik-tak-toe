@@ -53,72 +53,37 @@ function App() {
 		}
 	};
 
-  // test spaces 0 - 4 - 8
-	const testDiagonal1 = () => {
-		return board[0].player === board[4].player && board[4].player === board[8].player;
-	};
-
-  // test spaces 6 - 4 - 2
-	const testDiagonal2 = () => {
-		return board[6].player === board[4].player && board[4].player === board[2].player;
-	};
-
-  // test spaces 0 - 1 - 2
-	const testRow1 = () => {
-		return board[0].player === board[1].player && board[1].player === board[2].player;
-	};
-
-  // test spaces 3 - 4 - 5
-	const testRow2 = () => {
-		return board[3].player === board[4].player && board[4].player === board[5].player;
-	};
-
-  // test spaces 6 - 7 - 8
-	const testRow3 = () => {
-		return board[6].player === board[7].player && board[7].player === board[8].player;
-	};
-
-  // test spaces 0 - 3 - 6
-	const testCol1 = () => {
-		return board[0].player === board[3].player && board[3].player === board[6].player;
-	};
-
-  // test spaces 1 - 4 - 7
-	const testCol2 = () => {
-		return board[1].player === board[4].player && board[4].player === board[7].player;
-	};
-
-  // test spaces 2 - 5 - 8
-	const testCol3 = () => {
-		return board[2].player === board[5].player && board[5].player === board[8].player;
-	};
+  // params represent array indexes
+  const testSpaces = (one, two, three) => {
+    return board[one].player === board[two].player && board[two].player === board[three].player;
+  }
 
 	// check all possibilities for a winner
 	useEffect(() => {
     if (turnCount < 5) return;
 
-		if (testDiagonal1()) {
+		if (testSpaces(0, 4, 8)) {
 			setDiagonal1(true);
 		}
-		else if (testDiagonal2()) {
+		else if (testSpaces(2, 4, 6)) {
 			setDiagonal2(true);
 		}
-    else if (testRow1()) {
+    else if (testSpaces(0, 1, 2)) {
 			setRow1(true);
 		}
-    else if (testRow2()) {
+    else if (testSpaces(3, 4, 5)) {
 			setRow2(true);
 		}
-    else if (testRow3()) {
+    else if (testSpaces(6, 7, 8)) {
 			setRow3(true);
 		}
-    else if (testCol1()) {
+    else if (testSpaces(0, 3, 6)) {
       setCol1(true);
     }
-    else if (testCol2()) {
+    else if (testSpaces(1, 4, 7)) {
       setCol2(true);
     }
-    else if (testCol3()) {
+    else if (testSpaces(2, 5, 8)) {
       setCol3(true);
     }
 
