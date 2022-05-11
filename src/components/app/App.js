@@ -14,6 +14,9 @@ function App() {
   const [row1, setRow1] = useState(false);
   const [row2, setRow2] = useState(false);
   const [row3, setRow3] = useState(false);
+  const [col1, setCol1] = useState(false);
+  const [col2, setCol2] = useState(false);
+  const [col3, setCol3] = useState(false);
 
 
 	const changePlayers = () => {
@@ -75,6 +78,21 @@ function App() {
 		return board[6].player === board[7].player && board[7].player === board[8].player;
 	};
 
+  // test spaces 0 - 3 - 6
+	const testCol1 = () => {
+		return board[0].player === board[3].player && board[3].player === board[6].player;
+	};
+
+  // test spaces 1 - 4 - 7
+	const testCol2 = () => {
+		return board[1].player === board[4].player && board[4].player === board[7].player;
+	};
+
+  // test spaces 2 - 5 - 8
+	const testCol3 = () => {
+		return board[2].player === board[5].player && board[5].player === board[8].player;
+	};
+
 	// check all possibilities for a winner
 	useEffect(() => {
     if (turnCount < 5) return;
@@ -84,6 +102,9 @@ function App() {
     const rowResult1 = testRow1();
     const rowResult2 = testRow2();
     const rowResult3 = testRow3();
+    const colResult1 = testCol1();
+    const colResult2 = testCol2();
+    const colResult3 = testCol3();
 
 		if (diagonalResult1) {
 			setDiagonal1(true);
@@ -100,7 +121,16 @@ function App() {
     else if (rowResult3) {
 			setRow3(true);
 		}
-    
+    else if (colResult1) {
+      setCol1(true);
+    }
+    else if (colResult2) {
+      setCol2(true);
+    }
+    else if (colResult3) {
+      setCol3(true);
+    }
+
 	}, [turnCount]);
 
 	return (
