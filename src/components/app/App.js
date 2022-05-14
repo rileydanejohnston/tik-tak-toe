@@ -96,8 +96,17 @@ function App() {
 		});
 
 		setBoard(tempBoard);
-		
+
 	}, [winningIndexes])
+
+	const handleReset = () => {
+		setBoard(boardDefault);
+		setActivePlayer(1);
+		setTurnCount(0);
+		winningIndexes([]);
+		setWinner(0);
+		setIsTie(false);
+	}
 	
 
 	return (
@@ -113,6 +122,7 @@ function App() {
 					);
 				})}
 			</ul>
+			<button className='reset' data-testid='reset-button' onClick={handleReset}>Reset Game</button>
 		</div>
 	);
 }
