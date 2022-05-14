@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Square from '../square/Square';
+import Box from '../box/Box';
 import { boardDefault } from '../../constants/app-constants';
 
 function App() {
@@ -18,27 +18,27 @@ function App() {
 		setActivePlayer(newActivePlayer);
 	};
 
-	const updateSquares = squareId => {
-		// find the clicked square
+	const updateBoxes = boxId => {
+		// find the clicked box
 		// update isSelected and player properties
-		const tempBoard = board.map(square => {
-			const { id } = square;
-			if (squareId === id) {
+		const tempBoard = board.map(box => {
+			const { id } = box;
+			if (boxId === id) {
 				return {
 					id,
 					isSelected: true,
 					player: activePlayer,
 				};
 			}
-			return square;
+			return box;
 		});
 		return tempBoard;
 	};
 
-	const handleSquareClick = (clickId, selected) => {
-		// players can't choose squares that are already chosen
+	const handleBoxClick = (clickId, selected) => {
+		// players can't choose boxs that are already chosen
 		if (!selected) {
-			const tempBoard = updateSquares(clickId);
+			const tempBoard = updateBoxes(clickId);
 			setBoard(tempBoard);
 			setTurnCount(turnCount + 1);
 			changePlayers();
@@ -79,16 +79,16 @@ function App() {
 	useEffect(() => {
 		if (winningIndexes.length === 0) return;
 
-		const tempBoard = board.map((square, index) => {
+		const tempBoard = board.map((box, index) => {
 			// test if the board index is one of the winning indexes
 			const compareIndexes =
 				index === winningIndexes[0] ||
 				index === winningIndexes[1] ||
 				index === winningIndexes[2];
 			if (compareIndexes) {
-				square.winningSpace = true;
+				box.winningBox = true;
 			}
-			return square;
+			return box;
 		});
 
 		setBoard(tempBoard);
@@ -108,10 +108,10 @@ function App() {
 			<ul className='grid'>
 				{board.map(item => {
 					return (
-						<Square
+						<Box
 							key={item.id}
-							squareInfo={item}
-							handleSquareClick={handleSquareClick}
+							boxInfo={item}
+							handleBoxClick={handleBoxClick}
 						/>
 					);
 				})}
