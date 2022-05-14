@@ -98,7 +98,7 @@ function App() {
 		setBoard(boardDefault);
 		setActivePlayer(1);
 		setTurnCount(0);
-		winningIndexes([]);
+		setWinningIndexes([]);
 		setWinner(0);
 		setIsTie(false);
 	};
