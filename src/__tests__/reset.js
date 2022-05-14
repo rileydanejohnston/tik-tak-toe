@@ -3,9 +3,9 @@ import App from '../components/app/App';
 
 afterAll(cleanup);
 
-test('reset button', () => {
+test('reset button clears text from all boxes', () => {
 	const wrapper = render(<App />);
-	wrapper.debug();
+	// wrapper.debug();
 
 	const box1 = wrapper.getByTestId('box-1');
 	const box2 = wrapper.getByTestId('box-2');
@@ -18,22 +18,23 @@ test('reset button', () => {
 	const box9 = wrapper.getByTestId('box-9');
 
 	fireEvent.click(box1);
+  fireEvent.click(box2);
+  fireEvent.click(box3);
+  fireEvent.click(box4);
+  fireEvent.click(box5);
+  fireEvent.click(box6);
+  fireEvent.click(box7);
+  fireEvent.click(box8);
+  fireEvent.click(box9);
+
 	expect(box1.textContent).toBe('X');
-	fireEvent.click(box2);
 	expect(box2.textContent).toBe('O');
-	fireEvent.click(box3);
 	expect(box3.textContent).toBe('X');
-	fireEvent.click(box4);
 	expect(box4.textContent).toBe('O');
-	fireEvent.click(box5);
 	expect(box5.textContent).toBe('X');
-	fireEvent.click(box6);
 	expect(box6.textContent).toBe('O');
-	fireEvent.click(box7);
 	expect(box7.textContent).toBe('X');
-	fireEvent.click(box8);
 	expect(box8.textContent).toBe('O');
-	fireEvent.click(box9);
 	expect(box9.textContent).toBe('X');
 
 	const resetButton = wrapper.getByTestId('reset-button');
