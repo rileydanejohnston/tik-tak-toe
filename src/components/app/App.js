@@ -11,7 +11,6 @@ function App() {
 	// describes the winning series
 	const [winningIndexes, setWinningIndexes] = useState([]);
 
-
 	const changePlayers = () => {
 		// if p1 is active, activePlayer = p2
 		// if p2 is active, activePlayer = p1
@@ -46,49 +45,46 @@ function App() {
 		}
 	};
 
-  // params represent array indexes
-  const testSpaces = (one, two, three) => {
-    return board[one].player === board[two].player && board[two].player === board[three].player;
-  }
+	// params represent array indexes
+	const testSpaces = (one, two, three) => {
+		return (
+			board[one].player === board[two].player &&
+			board[two].player === board[three].player
+		);
+	};
 
 	// check all possibilities for a winner
 	useEffect(() => {
-    if (turnCount < 5) return;
+		if (turnCount < 5) return;
 
 		if (testSpaces(0, 4, 8)) {
-      setWinningIndexes([0, 4, 8]);
+			setWinningIndexes([0, 4, 8]);
+		} else if (testSpaces(2, 4, 6)) {
+			setWinningIndexes([2, 4, 6]);
+		} else if (testSpaces(0, 1, 2)) {
+			setWinningIndexes([0, 1, 2]);
+		} else if (testSpaces(3, 4, 5)) {
+			setWinningIndexes([3, 4, 5]);
+		} else if (testSpaces(6, 7, 8)) {
+			setWinningIndexes([6, 7, 8]);
+		} else if (testSpaces(0, 3, 6)) {
+			setWinningIndexes([0, 3, 6]);
+		} else if (testSpaces(1, 4, 7)) {
+			setWinningIndexes([1, 4, 7]);
+		} else if (testSpaces(2, 5, 8)) {
+			setWinningIndexes([2, 5, 8]);
 		}
-		else if (testSpaces(2, 4, 6)) {
-      setWinningIndexes([2, 4, 6]);
-		}
-    else if (testSpaces(0, 1, 2)) {
-      setWinningIndexes([0, 1, 2]);
-		}
-    else if (testSpaces(3, 4, 5)) {
-      setWinningIndexes([3, 4, 5]);
-		}
-    else if (testSpaces(6, 7, 8)) {
-      setWinningIndexes([6, 7, 8]);
-		}
-    else if (testSpaces(0, 3, 6)) {
-      setWinningIndexes([0, 3, 6]);
-    }
-    else if (testSpaces(1, 4, 7)) {
-      setWinningIndexes([1, 4, 7]);
-    }
-    else if (testSpaces(2, 5, 8)) {
-      setWinningIndexes([2, 5, 8]);
-    }
-
 	}, [turnCount]);
 
 	useEffect(() => {
-
 		if (winningIndexes.length === 0) return;
 
 		const tempBoard = board.map((square, index) => {
 			// test if the board index is one of the winning indexes
-			const compareIndexes = index === winningIndexes[0] || index === winningIndexes[1] || index === winningIndexes[2];
+			const compareIndexes =
+				index === winningIndexes[0] ||
+				index === winningIndexes[1] ||
+				index === winningIndexes[2];
 			if (compareIndexes) {
 				square.winningSpace = true;
 			}
@@ -96,8 +92,7 @@ function App() {
 		});
 
 		setBoard(tempBoard);
-
-	}, [winningIndexes])
+	}, [winningIndexes]);
 
 	const handleReset = () => {
 		setBoard(boardDefault);
@@ -106,8 +101,7 @@ function App() {
 		winningIndexes([]);
 		setWinner(0);
 		setIsTie(false);
-	}
-	
+	};
 
 	return (
 		<div className='app'>
@@ -122,7 +116,13 @@ function App() {
 					);
 				})}
 			</ul>
-			<button className='reset' data-testid='reset-button' onClick={handleReset}>Reset Game</button>
+			<button
+				className='reset'
+				data-testid='reset-button'
+				onClick={handleReset}
+			>
+				Reset Game
+			</button>
 		</div>
 	);
 }
