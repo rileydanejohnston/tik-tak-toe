@@ -1,4 +1,4 @@
-.square {
+.box {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -9,11 +9,11 @@
   border: 1px solid red;
 }
 
-.square_winner {
+.box_winner {
   background-color: aquamarine;
 }
 
-.square:hover {
+.box:hover {
   cursor: pointer;
   transform: scale(1.03);
 }

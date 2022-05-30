@@ -22,12 +22,13 @@ function App() {
 		// find the clicked box
 		// update isSelected and player properties
 		const tempBoard = board.map(box => {
-			const { id } = box;
+			const { id, winningBox } = box;
 			if (boxId === id) {
 				return {
 					id,
 					isSelected: true,
 					player: activePlayer,
+					winningBox
 				};
 			}
 			return box;

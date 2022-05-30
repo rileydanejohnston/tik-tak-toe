@@ -1,7 +1,5 @@
-import { cleanup, fireEvent, render } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import App from '../components/app/App';
-
-afterAll(cleanup);
 
 describe('<Box />', () => {
 	test('player changes with each click', () => {

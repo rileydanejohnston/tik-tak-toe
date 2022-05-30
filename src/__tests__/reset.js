@@ -1,7 +1,5 @@
-import { render, cleanup, fireEvent } from '@testing-library/react';
+import { render, fireEvent } from '@testing-library/react';
 import App from '../components/app/App';
-
-afterAll(cleanup);
 
 test('reset button clears text from all boxes', () => {
 	const wrapper = render(<App />);
